@@ -30,10 +30,8 @@ private:
 
 public:
 
-
 	explicit User(string user,string apodo, string pass, string url);
 	~User();
-
 	void Register();
 	void Login();
 	void LogOut();

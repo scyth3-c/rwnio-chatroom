@@ -158,6 +158,7 @@
     <ClCompile Include="display.cpp" />
     <ClCompile Include="http.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="message.cpp" />
     <ClCompile Include="user.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,6 @@ HTTP::HTTP(string url) : URL(url) {
 	}
 }
 
-
 size_t HTTP::callback(void* buffer, size_t size, size_t nmemb, string* data) {
 	size_t rsize = size * nmemb;
 	try {
@@ -21,7 +20,6 @@ size_t HTTP::callback(void* buffer, size_t size, size_t nmemb, string* data) {
 }
 void HTTP::get()
 {
-
 	curl_easy_setopt(curl, CURLOPT_URL, URL.c_str());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, HTTP::callback);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
@@ -60,13 +58,9 @@ void HTTP::post(string fields) {
 
 	curl_easy_cleanup(curl);
 }
-
-
-
 string HTTP::Response() {
 	return without(response, char(34));
 }
-
 
 string HTTP::without(string target, char key ) {
 	for (auto &it : target) {
