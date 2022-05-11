@@ -2,7 +2,10 @@
 
 ## rwnio linux
 
-make install 
-make
-
-./bin/rwnio
+  
+$ sudo make install 
+  
+$ make
+  
+$ ./bin/rwnio <
+  
