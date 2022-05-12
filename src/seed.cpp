@@ -1,5 +1,5 @@
 #include "seed.h"
-Seed::Seed() cadena("default") {}
+Seed::Seed() : cadena("default") {}
 Seed::Seed(const char* temp) : cadena(std::move(temp)) {}
 Seed::~Seed(){
     SEED.reset();
