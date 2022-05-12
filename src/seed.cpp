@@ -1,5 +1,5 @@
 #include "seed.h"
-
+Seed::Seed() {}
 Seed::Seed(const char* temp) : cadena(std::move(temp)) {}
 Seed::~Seed(){
     SEED.reset();
@@ -20,3 +20,5 @@ string Seed::getSeed() {
     SEED.reset();
     return temp;
 }
+
+void Seed::setPlain(const char* temp) {cadena = std::move(temp);}

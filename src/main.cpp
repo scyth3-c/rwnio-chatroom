@@ -5,8 +5,11 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-    Seed tasty("kevin");
+    Seed tasty;
+
+	tasty.setPlain("kevin");
 	tasty.genSeed();
+
 	cout<<tasty.getSeed();
 
 

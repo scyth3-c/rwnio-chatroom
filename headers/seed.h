@@ -7,8 +7,6 @@
 #include <openssl/sha.h>
 #include <stdio.h>
 
-#define STRING(string) #string
-
 using std::string;
 
 class Seed {
@@ -16,15 +14,18 @@ class Seed {
 private:
  
     unsigned char digest[SHA_DIGEST_LENGTH];
-    const char* cadena;
+    const char* cadena{};
     std::unique_ptr<string> SEED = nullptr;
 
 public:
 
-    explicit Seed(const char*);
+    Seed(const char*);
+    Seed();
     ~Seed();
     void genSeed();
+    void setPlain(const char*);
     string getSeed();
+    string getSeedX();
 };
 
 
