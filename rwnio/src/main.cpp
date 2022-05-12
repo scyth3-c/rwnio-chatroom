@@ -1,16 +1,14 @@
 #include <iostream>
-#include <http.h>
+#include <seed.h>
 
 using namespace std;
 
-int main(int argc, int *argv[]) {
+int main(int argc, char *argv[]) {
+
+    Seed tasty("kevin");
+	tasty.genSeed();
+	cout<<tasty.getSeed();
 
 
-	HTTP http("http://example.com");
-	http.get();
-	cout<<http.Response();
-	
-	
-	
 	return 0;
 }

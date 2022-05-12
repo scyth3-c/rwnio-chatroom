@@ -3,16 +3,20 @@
 #ifndef HTTP_H
 #define HTTP_H
 
+
 #define CURL_STATICLIB
 #include <curl/curl.h>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <functional>
+#include <memory>
 
 #include "rwnio.h"
 
 using std::string;
+using std::shared_ptr;
+using std::make_shared;
 
 class HTTP {
 private:

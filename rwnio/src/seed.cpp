@@ -1,0 +1,22 @@
+#include "seed.h"
+
+Seed::Seed(const char* temp) : cadena(std::move(temp)) {}
+Seed::~Seed(){
+    SEED.reset();
+}
+
+void  Seed::genSeed() { 
+    SHA256((unsigned char*)&cadena, strlen(cadena), (unsigned char*)&digest);
+    char mdstring[SHA_DIGEST_LENGTH*2+1];
+    for (size_t i = 0; i < SHA_DIGEST_LENGTH; i++)
+    {
+        sprintf(&mdstring[i*2], "%02x", (unsigned int)digest[i]);
+    }
+    SEED = std::make_unique<string>(mdstring);
+}
+
+string Seed::getSeed() {
+    string temp = std::move(*SEED);
+    SEED.reset();
+    return temp;
+}
