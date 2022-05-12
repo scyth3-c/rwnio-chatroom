@@ -8,15 +8,10 @@
 #include <curl/curl.h>
 #include <iostream>
 #include <string>
-#include <vector>
-#include <functional>
-#include <memory>
 
 #include "rwnio.h"
 
 using std::string;
-using std::shared_ptr;
-using std::make_shared;
 
 class HTTP {
 private:
@@ -33,8 +28,6 @@ public:
 
 	void get();
 	void post(string);
-
-	std::function<void(void)> test();
 
 	string Response();
 	string without(string, char);
