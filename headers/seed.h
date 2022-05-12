@@ -6,6 +6,7 @@
 #include <cstring>
 #include <openssl/sha.h>
 #include <stdio.h>
+#include <random>
 
 using std::string;
 
@@ -26,6 +27,7 @@ public:
     void setPlain(const char*);
     string getSeed();
     string getSeedX();
+    string genRandInit();
 };
 
 

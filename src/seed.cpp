@@ -22,3 +22,15 @@ string Seed::getSeed() {
 }
 
 void Seed::setPlain(const char* temp) {cadena = std::move(temp);}
+
+string Seed::genRandInit() {
+    std::random_device RD;
+    std::mt19937_64 MT(RD());
+    std::uniform_real_distribution<double> dist(1.0, 10.0);
+    float container{};
+     for (size_t i = 0; i < 16; i++)
+     {
+         container += dist(MT);
+     }
+     return std::to_string(container);
+}
