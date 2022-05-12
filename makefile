@@ -7,24 +7,23 @@ OBJETOS = $(DIR_OBJ)/main.o $(DIR_OBJ)/http.o $(DIR_OBJ)/message.o $(DIR_OBJ)/di
 
 
 CPPFLAGS = -std=c++17 -lcurl -I$(DIR_INC) -I/opt/ssl/include/ -L/opt/ssl/lib/ -lcrypto 
-CC = g++
+COMPILER = g++
 
 
 $(EJECUTABLE) : $(OBJETOS)
 	@mkdir -p $(DIR_BIN)
-	@$(CC) $(OBJETOS)  $(CPPFLAGS) -o $(EJECUTABLE)
+	@$(COMPILER) $(OBJETOS)  $(CPPFLAGS) -o $(EJECUTABLE)
 
 
 $(DIR_OBJ)/%.o : $(DIR_MAIN)/%.cpp
 	@mkdir -p $(DIR_OBJ)
-	@$(CC) -c -MD $(CPPFLAGS) $< -o $@
+	@$(COMPILER) -c -MD $(CPPFLAGS) $< -o $@
 -include $(DIR_OBJ)/*.d
 
 
-.PHONY: clean
+.PHONY: clean install
 clean:
 	@rm -r $(DIR_BIN) $(DIR_OBJ)
 
-.PHONY: install
 install:
 	apt-get install libcurl4-openssl-dev
