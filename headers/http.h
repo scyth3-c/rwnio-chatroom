@@ -8,6 +8,8 @@
 #include <curl/curl.h>
 #include <iostream>
 #include <string>
+#include <memory>
+#include <vector>
 
 #include "rwnio.h"
 
@@ -16,14 +18,16 @@ using std::string;
 class HTTP {
 private:
 
-	CURL* curl;
-	string URL;
-	string response;
+	std::shared_ptr<CURL*> curl = nullptr;
+	std::vector<CURLcode> performs;
+	unsigned int queryIndice=0;
+	string URL{};
+	string response{};
 
 public:
 
 	HTTP(string);
-
+    ~HTTP();
 	static size_t callback(void*, size_t, size_t, string*);
 
 	void get();
@@ -31,6 +35,7 @@ public:
 
 	string Response();
 	string without(string, char);
+	string genPerfomList();
 
 };
 

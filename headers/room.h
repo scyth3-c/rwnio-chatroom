@@ -3,7 +3,8 @@
 
 #include <memory>
 #include <string>
-#include <seed.h>
+#include "seed.h"
+
 
 using std::make_unique;
 using std::unique_ptr;
@@ -16,6 +17,8 @@ class Room {
         unique_ptr<string> hash = nullptr;        
 
     public:
+
+    Room();
 
         bool prepare();
         bool getRoom();
