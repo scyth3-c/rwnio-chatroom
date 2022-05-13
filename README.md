@@ -3,12 +3,25 @@
 ## rwnio linux
 
   
-$ sudo make install 
+ sudo make install 
   
-$ make
+make
   
-$ ./bin/rwnio 
+ ./bin/rwnio 
 
 
 si es basado en debian, o tiene PM DEB
-  
+
+## algunas notas
+
+directorios de inclusion de openssl en ubuntu para la generacion de la semilla sha256
+
+
+``` 
+
+I/opt/ssl/include/   
+
+L/opt/ssl/lib/
+
+
+```
