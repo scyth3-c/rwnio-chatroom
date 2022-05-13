@@ -18,7 +18,7 @@ size_t HTTP::callback(void* buffer, size_t size, size_t nmemb, string* data) {
 		data->append(static_cast<const char* >(buffer), rsize);
 	}
 	catch (std::bad_alloc& e) {
-		screen(std::clog, &e);
+		screen(std::clog, RWNIO_ERROR, SYSTEM_DECORATOR, &e);
 	}
 	return rsize;
 }
