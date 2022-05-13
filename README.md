@@ -2,13 +2,22 @@
 
 ## rwnio linux
 
-  
- sudo make install 
-  
-make
-  
- ./bin/rwnio 
+diplay y room estan en blanco porque aun faltan esos modulos
 
+
+para compilar:
+
+```
+
+  
+ # sudo make install 
+  
+ # make
+  
+ # ./bin/rwnio 
+
+
+```
 
 si es basado en debian, o tiene PM DEB
 
