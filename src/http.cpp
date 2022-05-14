@@ -40,8 +40,6 @@ void HTTP::get()
 	curl_easy_cleanup(*curl);
 }
 
-
-
 void HTTP::post(string fields) {
 
 	curl_easy_setopt(*curl, CURLOPT_URL, URL.c_str());
