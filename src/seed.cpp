@@ -1,6 +1,6 @@
 #include "seed.h"
 Seed::Seed() : cadena("default") {}
-Seed::Seed(const char* temp) : cadena(std::move(temp)) {}
+Seed::Seed(string temp) : cadena(temp.c_str()) {}
 Seed::~Seed(){
     SEED.reset();
 }

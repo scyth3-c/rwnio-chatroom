@@ -20,7 +20,7 @@ private:
 
 public:
 
-    Seed(const char*);
+    Seed(string);
     Seed();
     ~Seed();
     void genSeed();
