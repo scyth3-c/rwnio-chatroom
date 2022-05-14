@@ -28,6 +28,7 @@ public:
     string getSeed();
     string getSeedX();
     string genRandInit();
+    string SHA(string);
 };
 
 

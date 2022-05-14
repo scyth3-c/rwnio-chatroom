@@ -16,14 +16,16 @@ using std::make_shared;
 using std::vector;
 
 struct MSG_t {
-	MSG_t(string data[2]) {
+	MSG_t(string data[4]) {
 		hora = move(data[0]);
 		creador = move(data[1]);
 		contenido = move(data[2]);
+		secreto = move(data[3]);
 	}
 	string hora;
 	string creador;
 	string contenido;
+	string secreto;
 };
 
 class Message {
@@ -35,8 +37,10 @@ private:
 	shared_ptr<string> URL = nullptr;
 	shared_ptr<HTTP> http = nullptr;
 
+	shared_ptr<string> secreto = nullptr;
+
 public:
-	explicit Message(string creador);
+	explicit Message(string creador,string secreto);
 	    ~Message();
 
 		MSG_t reasing(string);

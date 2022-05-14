@@ -32,6 +32,7 @@ public:
 
 	void get();
 	void post(string);
+	void post(string, string);
 
 	string Response();
 	string without(string, char);

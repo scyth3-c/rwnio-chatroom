@@ -10,6 +10,8 @@ constexpr auto RWNIO_INFO = "-]";
 constexpr auto CURL_DECORATOR = "_IN CURL RESPONSE_";
 constexpr auto SYSTEM_DECORATOR = "_BAD SYSTEM RESPONSE_";
 
+#define RWNIO_HTTP_URL "http://localhost:3000/"
+
 #include <ostream>
 
 template<class...A>

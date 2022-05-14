@@ -1,13 +1,15 @@
 #include "message.h"
 
-Message::Message(string _creador)  {
+Message::Message(string _creador,string _secreto)  {
 	creador = make_shared<string>(_creador);
+	secreto = make_shared<string>(_secreto);
 }
 Message::~Message() {
 	http.reset();
 	URL.reset();
 	creador.reset();
 	Response.reset();
+	secreto.reset();
 }
 
  void Message::setUrl(string temp) {	URL = make_shared<string>(temp); }
@@ -29,13 +31,15 @@ MSG_t Message::last() {
 	return response;
 }
 
-string Message::compact(string mensaje) { return "creador=" + (*creador) + "&contenido=" + mensaje; }
+string Message::compact(string _mensaje) { return "creador=" + (*creador) + "&contenido=" + _mensaje + "&secreto="+*secreto;}
 
 MSG_t Message::reasing(string target)
 {
 	string hora{};
 	string creador{};
 	string contenido{};
+	string secreto{};
+
 	string* it = &contenido;
 	int pos = 0;
 	for (int i = 0; i < target.length(); i++)
@@ -46,10 +50,13 @@ MSG_t Message::reasing(string target)
 		}
 		else if(target[i] == ';' && pos == 1) {
 			it = &hora;
+			pos = 2;
+		} else if(target[i] == ';' && pos == 2) {
+			it =& secreto;
 		}
 		*it += target[i];
 	}
-	string temp [] = {clearify(hora),clearify(creador),clearify(contenido)};
+	string temp [4] = {clearify(hora),clearify(creador),clearify(contenido), clearify(secreto)};
 	MSG_t tasty(temp);
 	return tasty;
 }
