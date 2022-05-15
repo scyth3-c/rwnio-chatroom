@@ -23,9 +23,9 @@ string Message::send(string mensaje) {
 }
 
 MSG_t Message::last() {
-
-	http = make_shared<HTTP>(*URL + "last");
-	http->get();
+	
+	http = make_shared<HTTP>(*URL);
+	http->post("last", "secreto="+*secreto);
 	auto response = reasing(http->Response());
 	http.reset();
 	return response;

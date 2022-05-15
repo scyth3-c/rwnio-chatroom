@@ -14,6 +14,7 @@
 #include "rwnio.h"
 
 using std::string;
+using rwnio::screen;
 
 class HTTP {
 private:

@@ -7,6 +7,9 @@
 #include "seed.h"
 #include "namecon.h"
 #include "http.h"
+#include "room_modules.h"
+#include "message.h"
+#include "custom.h"
 
 #include <iostream>
 #include <vector>
@@ -55,25 +58,26 @@ class Room {
         unique_ptr<Seed> access = nullptr; 
         unique_ptr<Name> name = nullptr;
         shared_ptr<string> hash = nullptr;
-        shared_ptr<string> message_secret = nullptr;   
                
         unique_ptr<HTTP> http = nullptr;
+        shared_ptr<Screen> screen = nullptr;
+        unique_ptr<Modules> modules = nullptr;
+        shared_ptr<Message> message = nullptr;
+        shared_ptr<Custom> custom = nullptr;
+   
+    
 
     public:
 
     explicit Room(int, char**);
             ~Room();
 
-        bool MainLoop();
-        bool getRoom();
+        void MainLoop();
+        void startRoom();
 
         void prepare(string, string);
         void prepare(string);
         void prepare();
-
-        string Launch();
-        string getMeSecret();
-
 };
 
 

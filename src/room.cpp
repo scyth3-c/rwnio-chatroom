@@ -1,6 +1,13 @@
 #include "room.h"
 
 Room::Room(int argc, char *argv[]) {
+
+    modules = make_unique<Modules>();
+    modules->_sys(RWNIO_SYS_CLEAR);
+    modules->verifyNet();
+    modules->verifyDatabase();
+    modules.reset();
+
     switch (argc)
     {
     case 3:
@@ -44,13 +51,6 @@ void Room::prepare(string _secret) {
 }
 
 
-
-string Room::getMeSecret() {
-    string seed = access->genRandInit();
-    return access->SHA(seed);
-}
-
-
 void Room::prepare() {
     name = make_unique<Name>();
      access = make_unique<Seed>((string)("public"+name->getName() + access->genRandInit()));
@@ -58,24 +58,64 @@ void Room::prepare() {
      hash = make_shared<string>(access->getSeed());
 }
 
+void Room::MainLoop() {
+    
+    modules = make_unique<Modules>();
+    screen = make_shared<Screen>();
 
-string Room::Launch() {
+    modules->welcome(name->getName());
+    
+    char key = '0';
 
-  message_secret = make_shared<string>(getMeSecret());
+    do
+    { 
+        modules->_sys(RWNIO_SYS_CLEAR);
 
-    PARAMS<string> post_field = {
-        "hash=",
-         *hash,
-        "name=",
-         name->getName(),
-         "secret=",
-         *message_secret
-    };
+        rwnio::screen( C, "  [i]     Iniciar grupo", N );
+        rwnio::screen( C, "  [u]     Unirse a un grupo", N );
+        rwnio::screen( C, "  [n]     Cambiar Nombre", N );
+        rwnio::screen( C, "  [q]     Quit", N);
 
-    http = make_unique<HTTP>(RWNIO_HTTP_URL);
-    http->post("launch", post_field.transform());
-    auto res = http->Response();
-    http.reset();
-    return res;
+        rwnio::screen(C , N,  "> " );
+        std::cin >> key;        
+
+        switch (key)
+        {
+        
+        case 'i':
+          
+          startRoom();
+
+        break;
+
+        case 'n':
+            modules->_sys(RWNIO_SYS_CLEAR);
+
+            rwnio::screen(C, "ingresa tu nuevo nombre: ");
+            string _temp{};
+            std::cin>>_temp;
+            name->setName(std::move(_temp));
+            break;
+        }
+
+    } while (key!='q');
+
+    modules.reset();
 }
-  
+
+
+void Room::startRoom() {
+
+        modules->_sys(RWNIO_SYS_CLEAR);        
+        screen->write(" [*] Grupos", 1, 1);
+
+        rwnio::screen( C, N, N, "El hash de la sala:  ", *hash, N, N);
+        rwnio::screen(C, "> X ");
+        
+        char ch;
+        std::cin>>ch;
+
+        custom = make_shared<Custom>(name->getName(),*hash);
+        custom->loopCustom();
+
+}
