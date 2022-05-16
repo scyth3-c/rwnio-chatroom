@@ -15,20 +15,13 @@ using std::string;
 class Screen
 {
 private:
-    
-
 public:
-
     Screen();
 
-    void write(string, int,int);
+    void write(string, int, int);
     void gotoxy(int x, int y);
 
     void _wait(int);
-
 };
-
-
-
 
 #endif // ! SCREEN_H
