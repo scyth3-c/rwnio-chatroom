@@ -2,7 +2,6 @@
 #ifndef RWNIO_H
 #define RWNIO_H
 
-
 constexpr auto RWNIO_WARNING = "-[THIS IS A WARNING]-";
 constexpr auto RWNIO_ERROR = "-[CRITIAL ERROR]-";
 constexpr auto RWNIO_INFO = "-]";
@@ -12,30 +11,30 @@ constexpr auto SYSTEM_DECORATOR = "_BAD SYSTEM RESPONSE_";
 
 #define RWNIO_HTTP_URL "http://localhost:3000/"
 #define TEST_DOMAIN "http://example.com/"
+#define RWNIO_NAME "rwnio"
 
+#if defined(_WIN32) || defined(_WIN64)
+#define RWNIO_SYS_CLEAR "cls"
 
-#if defined(_WIN32) || defined(_WIN64) 
-  #define RWNIO_SYS_CLEAR "cls"
-#else 
-  #define RWNIO_SYS_CLEAR "clear"
+#else
+#define RWNIO_SYS_CLEAR "clear"
 #endif
 
-#include <ostream>
+#include <iostream>
 
 #define C std::cout
 #define N "\n"
 #define T "\t"
 
-namespace rwnio {
-
-template<class...A>
-void screen(std::ostream& access, A const&... params)
+namespace rwnio
 {
-	((access << params), ...);
-}
+
+  template <class... A>
+  void screen(std::ostream &access, A const &...params)
+  {
+    ((access << params), ...);
+  }
 
 };
-
-
 
 #endif // !RWNIO_H
