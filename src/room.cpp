@@ -1,6 +1,7 @@
 #include "room.h"
 
-Room::Room(int argc, char *argv[]) {
+Room::Room(int argc, char *argv[])
+{
 
     modules = make_unique<Modules>();
     modules->_sys(RWNIO_SYS_CLEAR);
@@ -8,10 +9,11 @@ Room::Room(int argc, char *argv[]) {
     modules->verifyDatabase();
     modules.reset();
 
+    models = make_unique<MODELS>();
     switch (argc)
     {
     case 3:
-         prepare(std::move(argv[1]),std::move(argv[2]));
+        prepare(std::move(argv[1]), std::move(argv[2]));
         break;
     case 2:
         prepare(std::move(argv[1]));
@@ -21,101 +23,110 @@ Room::Room(int argc, char *argv[]) {
     }
 }
 
+char Room::KEY = '1';
 
-
-Room::~Room() {
+Room::~Room()
+{
     access.reset();
     name.reset();
     hash.reset();
+    models.reset();
 }
 
+void Room::prepare(string _name, string _secret)
+{
+    name = make_unique<Name>(_name);
 
-void Room::prepare(string _name, string _secret) {
- name = make_unique<Name>(_name);
-
- if(name->verify()) {
-     name->setName(_name);
- }
- access = make_unique<Seed>((string)(_secret + name->getName() + access->genRandInit()));
- access->genSeed();
- hash = make_shared<string>(access->getSeed());
-}
-
-
-//sobrecarga de PREAPRE
-void Room::prepare(string _secret) {
-    name = make_unique<Name>();
-    access = make_unique<Seed>((string)(_secret+name->getName() + access->genRandInit()));
-    access->genSeed(); 
+    if (name->verify())
+    {
+        name->setName(_name);
+    }
+    access = make_unique<Seed>((string)(_secret + name->getName() + access->genRandInit()));
+    access->genSeed();
     hash = make_shared<string>(access->getSeed());
 }
 
-
-void Room::prepare() {
+// sobrecarga de PREAPRE
+void Room::prepare(string _secret)
+{
     name = make_unique<Name>();
-     access = make_unique<Seed>((string)("public"+name->getName() + access->genRandInit()));
-     access->genSeed();
-     hash = make_shared<string>(access->getSeed());
+    access = make_unique<Seed>((string)(_secret + name->getName() + access->genRandInit()));
+    access->genSeed();
+    hash = make_shared<string>(access->getSeed());
 }
 
-void Room::MainLoop() {
-    
+void Room::prepare()
+{
+    name = make_unique<Name>();
+    access = make_unique<Seed>((string)("public" + name->getName() + access->genRandInit()));
+    access->genSeed();
+    hash = make_shared<string>(access->getSeed());
+}
+
+void Room::MainLoop()
+{
+
     modules = make_unique<Modules>();
     screen = make_shared<Screen>();
-
     modules->welcome(name->getName());
-    
-    char key = '0';
 
     do
-    { 
-        modules->_sys(RWNIO_SYS_CLEAR);
+    {
+        models->mainLoop();
+        READKEY
 
-        rwnio::screen( C, "  [i]     Iniciar grupo", N );
-        rwnio::screen( C, "  [u]     Unirse a un grupo", N );
-        rwnio::screen( C, "  [n]     Cambiar Nombre", N );
-        rwnio::screen( C, "  [q]     Quit", N);
-
-        rwnio::screen(C , N,  "> " );
-        std::cin >> key;        
-
-        switch (key)
+        switch (GETKEY)
         {
-        
+        case 'u':
+            joinRoom();
+            break;
         case 'i':
-          
-          startRoom();
-
-        break;
-
+            startRoom();
+            break;
         case 'n':
             modules->_sys(RWNIO_SYS_CLEAR);
-
-            rwnio::screen(C, "ingresa tu nuevo nombre: ");
-            string _temp{};
-            std::cin>>_temp;
-            name->setName(std::move(_temp));
+            name->setName(std::move(models->changeName()));
             break;
         }
-
-    } while (key!='q');
-
+    } while (GETKEY != 'q');
     modules.reset();
 }
 
+void Room::setupMessage()
+{
+    message = make_shared<Message>(RWNIO_NAME, *hash);
+    message->setUrl(RWNIO_HTTP_URL);
+    message->send("rwnio");
+    message->send("test");
+    message->send("runtime");
+    message.reset();
+}
 
-void Room::startRoom() {
+void Room::welcomeRoom(string _hash)
+{
+    message = make_shared<Message>(RWNIO_NAME, _hash);
+    message->setUrl(RWNIO_HTTP_URL);
+    message->send(name->getName()+" ha ingresado a la sala. ");
+    message.reset();
+}
 
-        modules->_sys(RWNIO_SYS_CLEAR);        
-        screen->write(" [*] Grupos", 1, 1);
+void Room::startRoom()
+{
 
-        rwnio::screen( C, N, N, "El hash de la sala:  ", *hash, N, N);
-        rwnio::screen(C, "> X ");
-        
-        char ch;
-        std::cin>>ch;
+    modules->_sys(RWNIO_SYS_CLEAR);
+    models->startRoom(*hash);
 
-        custom = make_shared<Custom>(name->getName(),*hash);
-        custom->loopCustom();
+    setupMessage();
 
+    custom = make_shared<Custom>(name->getName(), *hash);
+    custom->loopCustom();
+}
+
+void Room::joinRoom()
+{
+    modules->_sys(RWNIO_SYS_CLEAR);
+    string hash = models->joinRoom();
+    welcomeRoom(hash);
+    custom = make_shared<Custom>(name->getName(),std::move(hash));
+    custom->loopCustom();
 }
