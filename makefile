@@ -12,7 +12,7 @@ OBJETOS = $(DIR_OBJ)/main.o \
 		  $(DIR_OBJ)/screen.o \
 		  $(DIR_OBJ)/room_modules.o \
 		  $(DIR_OBJ)/custom.o \
-
+		  $(DIR_OBJ)/models.o \
 
 CPPFLAGS = -std=c++17 -lcurl -I$(DIR_INC) -I/opt/ssl/include/ -L/opt/ssl/lib/ -lcrypto -pthread
 COMPILER = g++
