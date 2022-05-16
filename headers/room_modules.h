@@ -16,28 +16,24 @@ using std::shared_ptr;
 
 using std::string;
 
-
-template<class...P>
-struct MessageBox {
+template <class... P>
+struct MessageBox
+{
     MessageBox(std::initializer_list<P...> list) : messageList(list) {}
     std::vector<P...> messageList;
-
 };
 
+class Modules
+{
 
-
-class Modules {
-
-    private:
-    
+private:
     shared_ptr<Screen> screen = nullptr;
     unique_ptr<HTTP> http = nullptr;
 
-    unsigned int Xpos=2;
-    unsigned int Ypos=2;
+    unsigned int Xpos = 2;
+    unsigned int Ypos = 2;
 
-    public:
-
+public:
     Modules();
     ~Modules();
 
@@ -46,10 +42,7 @@ class Modules {
     void welcome(string);
     int countMessages(string);
 
-    inline void _sys(const char* cmd) {system(cmd);}
-
+    inline void _sys(const char *cmd) { system(cmd); }
 };
-
-
 
 #endif // ! ROOM_MODULES_H
