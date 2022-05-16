@@ -1,57 +1,65 @@
 #include "namecon.h"
 
+const char *Name::fileName = ".name";
 
-const char* Name::fileName = ".name";
-
-Name::Name(std::string temp)  {
+Name::Name(std::string temp)
+{
     asingName = std::make_shared<std::string>(std::move(temp));
-    if(!verify()) {
+    if (!verify())
+    {
         generateNamecon();
     }
 }
-Name::Name() {
+Name::Name()
+{
     asingName = std::make_shared<std::string>("unkown");
-    if(!verify()) {
+    if (!verify())
+    {
         generateNamecon();
     }
 }
-Name::~Name() {
+Name::~Name()
+{
     asingName.reset();
     storage.reset();
     reader.reset();
 }
 
-bool Name::verify() {
+bool Name::verify()
+{
 
-reader = std::make_shared<std::ifstream>(fileName);
-if(reader->good()) { 
-    reader.reset();
-    return true;
-}
-else {
-    reader.reset();
-    return false;
+    reader = std::make_shared<std::ifstream>(fileName);
+    if (reader->good())
+    {
+        reader.reset();
+        return true;
+    }
+    else
+    {
+        reader.reset();
+        return false;
+    }
 }
 
-}
-
-void Name::generateNamecon() {
-     storage = std::make_shared<std::ofstream>(fileName);
+void Name::generateNamecon()
+{
+    storage = std::make_shared<std::ofstream>(fileName);
     *storage << *asingName;
-     storage = nullptr;
+    storage = nullptr;
 }
 
-std::string Name::getName() {
-  reader = std::make_shared<std::ifstream>(fileName);
-  std::string name{};
-  *reader >> name;
-  reader.reset();
-  return name;
+std::string Name::getName()
+{
+    reader = std::make_shared<std::ifstream>(fileName);
+    std::string name{};
+    *reader >> name;
+    reader.reset();
+    return name;
 }
 
-
-void Name::setName(std::string temp) {
- asingName.reset();
- asingName = std::make_shared<std::string>(std::move(temp));
- generateNamecon();
+void Name::setName(std::string temp)
+{
+    asingName.reset();
+    asingName = std::make_shared<std::string>(std::move(temp));
+    generateNamecon();
 }
