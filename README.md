@@ -24,7 +24,7 @@ para ejecutar:
 
 # ./bin/rwnio username secret_seed      
 or
-#./bin/rwnio  secret          (yotu nick is default,change it in the menu)
+#./bin/rwnio  secret          (your nick is default,change it in the menu)
 or 
 # ./bin/rwnio                 (your nick is default, change it in the menu)
 
