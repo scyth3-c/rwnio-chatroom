@@ -22,9 +22,11 @@ para ejecutar:
 
 ```
 
-# ./bin/rwnio username
+# ./bin/rwnio username secret_seed      
 or
-#./bin/rwnio
+#./bin/rwnio  secret          (yotu nick is default,change it in the menu)
+or 
+# ./bin/rwnio                 (your nick is default, change it in the menu)
 
 ```
 
