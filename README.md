@@ -17,7 +17,9 @@
 <hr/>
 
 <div align="center">
- <h1>rwnio</h1>
+
+   <img width="200px"  src="https://user-images.githubusercontent.com/52190352/168956540-9654f48b-fe7e-4e2e-86da-a9df2db51086.png"/>
+    <h1>rwnio</h1>
 </div>
 
 
@@ -33,6 +35,17 @@ any contribution is welcome, currently there are some necessary functionalities 
 
 
 
+## important
+
+currently the api is in a free service that shuts down after 10min if the app is not used in general, it will take some time at startup
+
+also, I haven't implemented the symmetric encryption of the messages yet, I am in process, in the future I will change the http system for websockets that I don't use at the moment because I want to make it a little bit raw and improve it.
+
+## platforms
+
+- linux (Ubuntu 22.04) and in process
+- windows (coming soon)
+- other (coming soon)
 
 
 ## to compile
@@ -64,12 +77,11 @@ or
 
 ## interesting
 
-building id:
+building in:  Ubuntu 22.04 
 
-Ubuntu 22.04 
+ssl is includes (this is in the makefile)
 
-
-ssl includes (this is in the makefile)
+flags: -lcurl -lcrypto
 
 ``` 
 
