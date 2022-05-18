@@ -19,7 +19,7 @@
 <div align="center">
 
    <img width="200px"  src="https://user-images.githubusercontent.com/52190352/168956540-9654f48b-fe7e-4e2e-86da-a9df2db51086.png"/>
-    <h1>rwnio</h1>
+    <h1>rwnio (alpha)</h1>
 </div>
 
 
