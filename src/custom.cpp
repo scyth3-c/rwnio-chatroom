@@ -44,20 +44,40 @@ void Custom::send(string msg)
   message_send.reset();
 }
 
+
+#if !defined(_WIN32) || !defined(_WIN64)
+
+ int Custom::getch() {
+  struct termios oldt, newt;
+  int ch;
+  tcgetattr( STDIN_FILENO, &oldt );
+  newt = oldt;
+  newt.c_lflag &= ~( ICANON | ECHO );
+  tcsetattr( STDIN_FILENO, TCSANOW, &newt );
+  ch = getchar();
+  tcsetattr( STDIN_FILENO, TCSANOW, &oldt );
+  return ch;
+ }
+
+#endif
+
+
 void Custom::model(string _hora, string _autor, string _contenido)
 {
-  rwnio::screen(C,"[*] ", _hora, " [", _autor, "] : ", _contenido, N, N);
+  rwnio::screen(C,"   ___________________________________________________________", N);
+  rwnio::screen(C,"===|", _hora, " [", _autor, "] : ", _contenido, N);
+  rwnio::screen(C,"   -----------------------------------------------------------", N);
 }
 
 void Custom::viewLoop(Custom *obj)
 {
   while (true)
   {
-
     _MSG_t = "";
-    if(obj->messages[0]->contenido == "al parecer la sala no existe aun") obj->~Custom();
     obj->charge();
     obj->modules->_sys(RWNIO_SYS_CLEAR);
+    
+    rwnio::screen(C,N,"[los mensajes se haran invisibles despues de 2s pero ahi estan!! :) ]",N,N);
     obj->model(obj->messages[2]->hora, obj->messages[2]->creador, obj->messages[2]->contenido);
     obj->model(obj->messages[1]->hora, obj->messages[1]->creador, obj->messages[1]->contenido);
     obj->model(obj->messages[0]->hora, obj->messages[0]->creador, obj->messages[0]->contenido);
@@ -66,13 +86,15 @@ void Custom::viewLoop(Custom *obj)
 }
 
 void Custom::sendLoop()
-{
+{  
   while (true)
   {
-    _MSG
-        send(_MSG_t);
+    reader = getchar();
+    if((int)reader == 10) { send(_MSG_t); }
+    _MSG_t += (const char)reader;
   }
 }
+
 
 void Custom::loopCustom()
 {
@@ -82,4 +104,5 @@ void Custom::loopCustom()
 
   sendLoop();
   _viewLoopThread.join();
+
 }

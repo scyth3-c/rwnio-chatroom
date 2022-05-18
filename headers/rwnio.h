@@ -20,21 +20,17 @@ constexpr auto SYSTEM_DECORATOR = "_BAD SYSTEM RESPONSE_";
 #define RWNIO_SYS_CLEAR "clear"
 #endif
 
-#include <iostream>
-
 #define C std::cout
 #define N "\n"
-#define T "\t"
 
+#include <iostream>
 namespace rwnio
 {
-
   template <class... A>
   void screen(std::ostream &access, A const &...params)
   {
     ((access << params), ...);
   }
-
 };
 
 #endif // !RWNIO_H

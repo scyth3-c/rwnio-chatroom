@@ -3,10 +3,9 @@
 
 #include <memory>
 #include <string>
-#include "rwnio.h"
 #include "seed.h"
 #include "namecon.h"
-#include "http.h"
+#include "rwnio.h"
 #include "room_modules.h"
 #include "message.h"
 #include "custom.h"
@@ -73,6 +72,7 @@ private:
 
     unique_ptr<MODELS> models = nullptr;
 
+
 public:
     static char KEY;
 
@@ -86,7 +86,7 @@ public:
     void prepare(string, string);
     void prepare(string);
     void prepare();
-    void setupMessage();
+    void setupMessage(string);
     void welcomeRoom(string);
 };
 

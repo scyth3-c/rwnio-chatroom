@@ -29,7 +29,7 @@ void Modules::verifyDatabase()
 {
 
     http = make_unique<HTTP>(RWNIO_HTTP_URL);
-    screen->write("verificando la base de datos...", Xpos, Ypos++);
+    screen->write("activando o conectando al servidor...", Xpos, Ypos++);
 
     http->post("last");
     string res = http->Response();
@@ -45,8 +45,8 @@ void Modules::welcome(string _name)
 {
 
     _sys(RWNIO_SYS_CLEAR);
-    screen->write("BIENVENIDO [" + std::move(_name) + "]", Xpos, Ypos);
-    screen->_wait(400);
+    screen->write("bienvenido a rwnio [" + std::move(_name) + "]...", Xpos, Ypos);
+    screen->_wait(1000);
     _sys(RWNIO_SYS_CLEAR);
 }
 

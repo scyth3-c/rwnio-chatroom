@@ -34,7 +34,7 @@ MSG_t Message::last(int _sort)
 	return response;
 }
 
-string Message::compact(string _mensaje) { return "creador=" + (*creador) + "&contenido=" + _mensaje + "&secreto=" + *secreto; }
+string Message::compact(string _mensaje) { return "creador=" + (*creador) + "&contenido=" + std::move(_mensaje) + "&secreto=" + *secreto; }
 
 MSG_t Message::reasing(string target)
 {
