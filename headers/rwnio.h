@@ -9,7 +9,7 @@ constexpr auto RWNIO_INFO = "-]";
 constexpr auto CURL_DECORATOR = "_IN CURL RESPONSE_";
 constexpr auto SYSTEM_DECORATOR = "_BAD SYSTEM RESPONSE_";
 
-#define RWNIO_HTTP_URL "http://localhost:3000/"
+#define RWNIO_HTTP_URL "https://rwnio-app.herokuapp.com/"
 #define TEST_DOMAIN "http://example.com/"
 #define RWNIO_NAME "rwnio"
 
