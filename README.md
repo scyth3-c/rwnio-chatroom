@@ -37,6 +37,8 @@ any contribution is welcome, currently there are some necessary functionalities 
 
 ## important
 
+**The Doc is coming**
+
 currently the api is in a free service that shuts down after 10min if the app is not used in general, it will take some time at startup
 
 also, I haven't implemented the symmetric encryption of the messages yet, I am in process, in the future I will change the http system for websockets that I don't use at the moment because I want to make it a little bit raw and improve it.
