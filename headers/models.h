@@ -10,6 +10,8 @@
 #include "screen.h"
 
 #define PAUSE std::cin >> MODELS::__key;
+#define C std::cout
+
 
 class MODELS
 {
