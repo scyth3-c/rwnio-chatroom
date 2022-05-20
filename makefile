@@ -14,7 +14,7 @@ OBJETOS = $(DIR_OBJ)/main.o \
 		  $(DIR_OBJ)/custom.o \
 		  $(DIR_OBJ)/models.o \
 
-CPPFLAGS = -std=c++20 -lcurl -I$(DIR_INC) -I/opt/ssl/include/ -L/opt/ssl/lib/ -lcrypto -pthread
+CPPFLAGS = -std=c++17 -lcurl -I$(DIR_INC) -I/opt/ssl/include/ -L/opt/ssl/lib/ -lcrypto -pthread
 COMPILER = g++
 
 
