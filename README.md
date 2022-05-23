@@ -29,6 +29,14 @@ _rwnio is a program in terminal to talk in chat rooms with your friends, you can
 _you can set your name when you launch the program, as well as change it once inside, which is persistent locally on your computer, the only information you need is a nickname and it is optional, the messages become invisible after 2s of typing but STILL there to be sent, enjoy rwnio_
 
 
+## in process
+
+- _change msg system_
+- _repair and add the AES esncrypt_
+- _change room system_
+
+
+
 ## contribution
 
 any contribution is welcome, currently there are some necessary functionalities that are not yet implemented and I am working on it, your help would be awesome, any contribution, be sure to tell me what changes and what effect it will bring to rwnio.
